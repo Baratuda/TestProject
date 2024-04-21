@@ -1,0 +1,18 @@
+{% load draw_menu %}
+<ul>
+    {% for i in items %}
+        {% has_children i all_items as children %}
+        {% if children.has_children %}
+            <li id='{{children.id}}' class='has-sub'>
+        {% else %}
+            <li id='{{children.id}}' class="null">
+        {% endif %}
+                <a href="{{i.get_absolute_url}}">
+                    <span>{{ i.title }}</span>
+                </a>
+                {% if children.has_children %}
+                    {% draw_menu i.title all_items %}
+                {% endif %}
+            </li>
+    {% endfor %}
+</ul>
