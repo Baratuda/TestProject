@@ -20,15 +20,20 @@ class Menu(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        #Данная конструкция позволяет определить главные меню и 
+        # передает их менеджеру путей помечая как 'main'.
         if self.parent_id: 
             parent = self.parent_id
         else: 
-            parent = 'main'
+            parent = 'main' 
         return reverse('view_menu_description', args=[parent, self.slug,])
         
 
 @receiver(pre_save, sender=Menu)
 def create_slug(sender, instance, *args, **kwargs):
+    """
+    Сигнал который заполняет поле main_menu перед созданием записи в БД. 
+    """
     if instance.parent_id:
         parent = Menu.objects.get(pk=instance.parent_id)
         if parent.main_menu_id:

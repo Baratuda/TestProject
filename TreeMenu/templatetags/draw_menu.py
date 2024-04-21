@@ -6,6 +6,10 @@ register = template.Library()
 
 @register.inclusion_tag('TreeMenu/draw_menu.html')
 def draw_menu(menu, all_items=[]):
+    """ 
+    Пользовательский тег который в случае отсутствия параметра all_items отображает главное меню
+    и в случае наличия данного параметра отображает подменю главного меню.
+    """
     if all_items!= []:
         items = []
         for i in all_items[:]:
@@ -22,6 +26,10 @@ def draw_menu(menu, all_items=[]):
 
 @register.simple_tag()
 def has_children(menu, all_items):
+    """ 
+    Пользовательский тег который проверяет наличие дочерних элементов и 
+    возращает соответсвующий ответ.
+    """
     for i in all_items:
         if str(i.parent_id) == menu.title:
             return {'has_children':True, 'id': str(menu.slug)+str(menu.parent_id)}
