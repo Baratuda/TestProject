@@ -1,3 +1,4 @@
+from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from .models import Menu
 from django.db.models import Q
@@ -18,7 +19,8 @@ def view_menu_description(request, menu_name, parent_id):
         content = get_object_or_404(Menu, slug=menu_name).content
     else: 
         content = get_object_or_404(Menu, slug=menu_name,parent=parent_id).content
-    return render(request, 'TreeMenu/index.html', {'content':content, 'title':menu_name}) 
+    return render(request, 'TreeMenu/index.html', {'content' : content, 'title' : menu_name}) 
 
 
-
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
