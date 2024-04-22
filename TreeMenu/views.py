@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Menu
 from django.db.models import Q
+from django.views.generic import DetailView
 
 def main_page(request):
     """ 
@@ -11,13 +12,13 @@ def main_page(request):
 def view_menu_description(request, menu_name, parent_id):
     """ 
     Функция представление  отображающая информацию о 
-    конкретном меню или подменю.
+    конкретном меню или подменю
     """
     if parent_id == 'main':
-        content = Menu.objects.values('content').get(slug=menu_name)
+        content = get_object_or_404(Menu, slug=menu_name).content
     else: 
-        content = Menu.objects.values('content').get( Q(slug=menu_name) & Q(parent=parent_id))
-    return render(request, 'TreeMenu/index.html', {'content':content['content']}) 
+        content = get_object_or_404(Menu, slug=menu_name,parent=parent_id).content
+    return render(request, 'TreeMenu/index.html', {'content':content, 'title':menu_name}) 
 
 
 
