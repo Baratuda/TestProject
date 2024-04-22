@@ -4,29 +4,25 @@ $(document).ready(function () {
     // has-sub если меню закрывается и has-sub open, если меню открывается 
     $('nav li.has-sub > a').on('click', function () {
       var element = $(this).parent('li');
+      var id = element.attr('id');
       if (element.hasClass('open'))
-        sessionStorage.setItem(element.attr('id'),'has-sub');
+        sessionStorage.setItem(id,'has-sub');
       else 
-        sessionStorage.setItem(element.attr('id'),'has-sub open');
-      // var x = $('li#'+element.attr('id')+' > ul');
-      // var children = $(x);
-      // alert(x.length);
-      // children.each(function(index) {
-      //   alert('#');
-      // });
-      // for(let i in children){
-        
-        // var id = i.attr('id');
-        // if (i.hasClass('open'))
-        //   sessionStorage.setItem(id,'has-sub');
-      // }
+        sessionStorage.setItem(id,'has-sub open');
+      // Код сварачивает все дочерние подменю если основное меню свернуто
+      element.find('*').each(function(index) {
+         if($(this).attr('class')=='has-sub open')
+            sessionStorage.setItem($(this).attr('id'),'has-sub');
+      });
     });
+  
     //Функция которая в случае нажатия на пункт меню делает его активным
     $('a').on('click', function () {
       var element = $(this).parent('li');
       var id = element.attr('id');
       sessionStorage.setItem('activate', id);
-    });   
+    }); 
+
     //Стилизация тега nav>ul>li.has-sub>a
     $('nav>ul>li.has-sub>a').append('<span class="holder"></span>');
 });
