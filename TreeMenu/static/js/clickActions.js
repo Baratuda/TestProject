@@ -8,6 +8,18 @@ $(document).ready(function () {
         sessionStorage.setItem(element.attr('id'),'has-sub');
       else 
         sessionStorage.setItem(element.attr('id'),'has-sub open');
+      // var x = $('li#'+element.attr('id')+' > ul');
+      // var children = $(x);
+      // alert(x.length);
+      // children.each(function(index) {
+      //   alert('#');
+      // });
+      // for(let i in children){
+        
+        // var id = i.attr('id');
+        // if (i.hasClass('open'))
+        //   sessionStorage.setItem(id,'has-sub');
+      // }
     });
     //Функция которая в случае нажатия на пункт меню делает его активным
     $('a').on('click', function () {

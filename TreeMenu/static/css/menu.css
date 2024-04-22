@@ -157,9 +157,7 @@ nav ul ul ul li:first-child > a {
     -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
 }
-nav ul ul ul li {
-    padding-left: 30px;
-}
+
 nav > ul > li > ul > li:last-child > a,
 nav > ul > li > ul > li.last > a {
     border-bottom: 0 none;
